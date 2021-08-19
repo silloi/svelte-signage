@@ -1,65 +1,58 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import TailwindCSS from './TailwindCSS.svelte'
+	import Carousel from 'svelte-carousel'
+	import Card from './Card.svelte'
+
+	const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	
+	let list = [
+		{
+			text: lipsum,
+			color: '#85d78b',
+			image: 'https://live.staticflickr.com/4358/36106906420_38e7124a19_b.jpg',
+			emoji: '🧐',
+		},
+		{
+			text: lipsum,
+			color: '#71d077',
+			emoji: '👶',
+		},
+		{
+			text: lipsum,
+			color: '#5dca64',
+			image: 'https://live.staticflickr.com/65535/51354839188_424b558cd6_b.jpg',
+			emoji: '👑',
+		},
+		{
+			text: lipsum,
+			color: '#49c351',
+			emoji: '✨',
+		},
+		{
+			text: lipsum,
+			color: '#35bd3e',
+			emoji: '🏅',
+		},
+	]
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
+<svelte:head>
+	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+</svelte:head>
 
-  <Counter />
+<TailwindCSS />
+<Carousel
+	arrows={false}
+	dots={false}
+  autoplay
+  autoplayDuration={5000}
+>
+	{#each list as item}
+		<Card {...item}/>
+	{/each}
+</Carousel>
 
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-</main>
-
-<style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
-  }
-</style>

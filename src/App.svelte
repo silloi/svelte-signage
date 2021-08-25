@@ -1,6 +1,6 @@
 <script lang="ts">
   import TailwindCSS from './TailwindCSS.svelte'
-  import { Autoplay, Lazy } from 'swiper'
+  import { Autoplay } from 'swiper'
 	import { Swiper, SwiperSlide } from 'swiper/svelte'
 	import Card from './Card.svelte'
 

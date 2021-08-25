@@ -25,6 +25,7 @@
       title: '',
 			text: lipsum,
 			color: '#5dca64',
+      video: 'https://www.youtube.com/watch?v=4hdKXr8wGrk',
 			image: 'https://live.staticflickr.com/65535/51354839188_424b558cd6_b.jpg',
 			emoji: '👑',
       qr: '',

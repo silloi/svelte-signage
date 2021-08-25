@@ -59,7 +59,7 @@
 	arrows={false}
 	dots={false}
   autoplay
-  autoplayDuration={5000}
+  autoplayDuration={10000}
 >
 	{#each list as item}
 		<Card {...item}/>

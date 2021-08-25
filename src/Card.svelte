@@ -9,29 +9,29 @@
 </script>
 
 <section
-  class="w-screen h-screen flex justify-center select-none bg-gray-900 text-gray-300"
+  class="w-screen h-screen flex justify-center select-none bg-theme-gray text-white"
 >
 	{#if image}
-  <div class="flex-1">
+  <div class="flex-1 shadow-2xl">
     <img alt="" src={image} class="h-full object-cover" />
   </div>
 	{/if}
 
-  <div class="flex-1 flex flex-col justify-center" style="max-width: 976px;">
+  <div class="flex-1 flex flex-col justify-center pb-8" style="max-width: 1280px;">
     <div class="px-32 flex flex-col">
-      <div class="relative text-6xl pb-4">
+      <div class="relative text-8xl pb-8">
         {emoji}
       </div>
       
       <div>
         {#if title}
-        <h2 class="text-4xl pb-4">
+        <h2 class="text-5xl pb-4">
           {title}
         </h2>
         {/if}
         
         {#if text}
-        <p class="leading-loose py-4">
+        <p class="leading-loose text-2xl pt-12 pb-4">
           {abstract}
         </p>	
         {/if}	

@@ -1,7 +1,11 @@
 <script lang="ts">
   import TailwindCSS from './TailwindCSS.svelte'
-	import Carousel from 'svelte-carousel'
+  import { Autoplay, Lazy } from 'swiper'
+	import { Swiper, SwiperSlide } from 'swiper/svelte'
 	import Card from './Card.svelte'
+
+  import 'swiper/css'
+  import 'swiper/css/autoplay'
 
 	const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 	
@@ -56,14 +60,20 @@
 </svelte:head>
 
 <TailwindCSS />
-<Carousel
-	arrows={false}
-	dots={false}
-  autoplay
-  autoplayDuration={10000}
+<Swiper
+  modules={[Autoplay]}
+  slidesPerView={1}
+  autoplay={
+    {delay: 10000}
+  }
+  loop
+  on:slideChange={() => console.log('slide change')}
+  on:swiper={(e) => console.log(e.detail[0])}
 >
 	{#each list as item}
+  <SwiperSlide>
 		<Card {...item}/>
+  </SwiperSlide>
 	{/each}
-</Carousel>
+</Swiper>
 

@@ -7,7 +7,7 @@
   export let qr = ''
 	
 	$: abstract = text ? text.substr(0, 140) + '...' : ''
-  $: youtube = video.split('?v=').length > 1 ? 'https://www.youtube.com/embed/' + video.split('?v=')[1] + '?autoplay=1&mute=1&playsinline=1&loop=1' : ''
+  $: youtube = video.split('?v=').length > 1 ? 'https://www.youtube.com/embed/' + video.split('?v=')[1] + '?autoplay=1&mute=1&playsinline=1&loop=1&playlist=' + video.split('?v=')[1] : ''
 </script>
 
 <section

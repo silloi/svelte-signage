@@ -7,6 +7,23 @@
   import 'swiper/css'
   import 'swiper/css/autoplay'
 
+  let isFullscreen = false
+
+  const launchOnFullscreen = () => {
+    if( document.body.requestFullscreen ) {
+      document.body.requestFullscreen();
+    } else if( document.body.webkitEnterFullscreen ) {
+      document.body.webkitEnterFullscreen();
+    } else if( document.body.mozRequestFullScreen ) {
+      document.body.mozRequestFullScreen();
+    } else if( document.body.webkitRequestFullscreen ) {
+      document.body.webkitRequestFullscreen();
+    } else if( document.body.msRequestFullscreen ) {
+      document.body.msRequestFullscreen();
+		}			
+    isFullscreen = true
+  }
+
 	const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 	
 	let list = [
@@ -60,20 +77,27 @@
 </svelte:head>
 
 <TailwindCSS />
-<Swiper
-  modules={[Autoplay]}
-  slidesPerView={1}
-  autoplay={
-    {delay: 10000}
-  }
-  loop
-  on:slideChange={() => console.log('slide change')}
-  on:swiper={(e) => console.log(e.detail[0])}
->
-	{#each list as item}
-  <SwiperSlide>
-		<Card {...item}/>
-  </SwiperSlide>
-	{/each}
-</Swiper>
+<div class="relative">
+  <Swiper
+    modules={[Autoplay]}
+    slidesPerView={1}
+    autoplay={
+      {delay: 10000}
+    }
+    loop
+    on:slideChange={() => console.log('slide change')}
+    on:swiper={(e) => console.log(e.detail[0])}
+  >
+    {#each list as item}
+    <SwiperSlide>
+      <Card {...item}/>
+    </SwiperSlide>
+    {/each}
+  </Swiper>
 
+  {#if !isFullscreen}
+    <button on:click={launchOnFullscreen} class="absolute bottom-0 right-0 z-10 bg-white p-2">
+      全画面表示
+    </button>
+  {/if}
+</div>

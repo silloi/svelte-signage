@@ -1,13 +1,13 @@
 <script lang="ts">
   import TailwindCSS from './TailwindCSS.svelte'
   import { onMount } from 'svelte'
-  import { Autoplay } from 'swiper'
+  import { Pagination } from 'swiper'
 	import { Swiper, SwiperSlide } from 'swiper/svelte'
   import YouTubePlayer from 'youtube-player'
 	import Card from './Card.svelte'
 
   import 'swiper/css'
-  import 'swiper/css/autoplay'
+  import 'swiper/css/pagination'
 
   const onTransitionStart = (e) => {
     list.forEach(async (item) => {
@@ -125,9 +125,10 @@
 <TailwindCSS />
 <div class="relative">
   <Swiper
-    modules={[Autoplay]}
+    modules={[Pagination]}
     slidesPerView={1}
     loop
+    pagination={{ type: 'progressbar' }}
     on:transitionStart={onTransitionStart}
   >
     {#each list as item}

@@ -1,23 +1,17 @@
 <script lang="ts">
   export let title = ''
   export let text = ''
-  export let video = ''
   export let image = ''
   export let emoji = ''
   export let qr = ''
 	
 	$: abstract = text ? text.substr(0, 140) + '...' : ''
-  $: youtube = video.split('?v=').length > 1 ? 'https://www.youtube.com/embed/' + video.split('?v=')[1] + '?autoplay=1&mute=1&playsinline=1&loop=1&playlist=' + video.split('?v=')[1] : ''
 </script>
 
 <section
   class="w-screen h-screen flex justify-center select-none bg-theme-gray text-white"
 >
-  {#if video}
-  <div class="flex-1 shadow-2xl">
-    <iframe class="w-full h-full" src={youtube} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-	{:else if image}
+	{#if image}
   <div class="flex-1 shadow-2xl">
     <img alt="" src={image} class="h-full object-cover" />
   </div>

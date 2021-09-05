@@ -9,16 +9,12 @@
   import 'swiper/css'
   import 'swiper/css/autoplay'
 
+  let duration = 0
+  
   /* "swiper" event emitted with "swiper" instance argument */
   const onSwiper = (e) => {
     const [swiper] = e.detail;
     console.log(swiper);
-
-    const interval = 3000
-
-    setInterval(() => {
-      swiper.slideNext(500)
-    }, interval)
   }
 
   const onTransitionStart = (e) => {
@@ -28,6 +24,19 @@
         item.player.playVideo()
       }
     })
+
+    const [swiper] = e.detail
+    let activeIndex = swiper[0].activeIndex % list.length
+    if (activeIndex === 0) {
+      activeIndex = list.length
+    }
+
+    console.log('active', activeIndex)
+    if (list[activeIndex - 1].duration) {
+      setTimeout(() => swiper[0].slideNext(), list[activeIndex - 1].duration)
+    } else {
+      setTimeout(() => swiper[0].slideNext(), 3000)
+    }
   }
 
   let isFullscreen = false
@@ -57,6 +66,7 @@
 			emoji: '🧐',
       qr: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/QR_code_desktop_Japanese_Wikipedia.svg/1200px-QR_code_desktop_Japanese_Wikipedia.svg.png',
       player: null,
+      duration: 0,
 		},
 		{
       title: 'Title2 title TITLE',
@@ -64,6 +74,7 @@
 			emoji: '👶',
       qr: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/QR_code_desktop_Japanese_Wikipedia.svg/1200px-QR_code_desktop_Japanese_Wikipedia.svg.png',
       player: null,
+      duration: 0,
     },
 		{
       title: '',
@@ -73,6 +84,7 @@
 			emoji: '👑',
       qr: '',
       player: null,
+      duration: 10000,
 		},
 		{
       title: 'Title4 title TITLE',
@@ -80,6 +92,7 @@
 			emoji: '',
       qr: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/QR_code_desktop_Japanese_Wikipedia.svg/1200px-QR_code_desktop_Japanese_Wikipedia.svg.png',
       player: null,
+      duration: 0,
     },
 		{
       title: 'Title5 title TITLE',
@@ -87,6 +100,7 @@
 			emoji: '🏅',
       qr: '',
       player: null,
+      duration: 0,
     },
 	]
 
@@ -105,6 +119,7 @@
       }
     })
   })
+
 </script>
 
 <svelte:head>

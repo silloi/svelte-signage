@@ -9,31 +9,23 @@
   import 'swiper/css'
   import 'swiper/css/autoplay'
 
-  let duration = 0
-  
-  /* "swiper" event emitted with "swiper" instance argument */
-  const onSwiper = (e) => {
-    const [swiper] = e.detail;
-    console.log(swiper);
-  }
-
   const onTransitionStart = (e) => {
-    list.forEach((item) => {
+    list.forEach(async (item) => {
       if (item.player) {
         item.player.stopVideo()
         item.player.playVideo()
+        item.duration = await item.player.getDuration()
       }
     })
-
+    
     const [swiper] = e.detail
     let activeIndex = swiper[0].activeIndex % list.length
     if (activeIndex === 0) {
       activeIndex = list.length
     }
 
-    console.log('active', activeIndex)
     if (list[activeIndex - 1].duration) {
-      setTimeout(() => swiper[0].slideNext(), list[activeIndex - 1].duration)
+      setTimeout(() => swiper[0].slideNext(), list[activeIndex - 1].duration * 1000)
     } else {
       setTimeout(() => swiper[0].slideNext(), 3000)
     }
@@ -79,12 +71,12 @@
 		{
       title: '',
 			text: lipsum,
-      video: '4hdKXr8wGrk',
+      video: '1BxG_7CqJb0',
 			image: 'https://live.staticflickr.com/65535/51354839188_424b558cd6_b.jpg',
 			emoji: '👑',
       qr: '',
       player: null,
-      duration: 10000,
+      duration: 0,
 		},
 		{
       title: 'Title4 title TITLE',
@@ -136,7 +128,6 @@
     modules={[Autoplay]}
     slidesPerView={1}
     loop
-    on:swiper={onSwiper}
     on:transitionStart={onTransitionStart}
   >
     {#each list as item}
@@ -144,7 +135,13 @@
         {#if item.video}
           <div id={item.video} class="w-full h-screen"></div>
         {:else}
-          <Card {...item}/>
+          <Card
+            title={item.title}
+            text={item.text}
+            image={item.image}
+            emoji={item.emoji}
+            qr={item.qr}
+          />
         {/if}
       </SwiperSlide>
     {/each}
